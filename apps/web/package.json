@@ -12,6 +12,7 @@
     "@ai-sdk/react": "^1.0.0",
     "@constituicao/shared": "workspace:*",
     "ai": "^4.0.0",
+    "geist": "^1.7.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

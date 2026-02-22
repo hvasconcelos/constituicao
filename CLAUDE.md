@@ -53,3 +53,35 @@ bun run ingest           # Parse constituicao.txt, embed, store in ChromaDB
 - API validation with Zod
 - All user-facing text in European Portuguese
 - Tailwind CSS 4 (imported via `@import "tailwindcss"` in globals.css)
+
+## Design System
+
+Vercel-inspired light theme. Monochrome palette, Geist typography, precise spacing.
+
+### Font
+- **Geist Sans** (body) and **Geist Mono** (code/article numbers) via the `geist` npm package.
+- Configured as CSS variables `--font-geist-sans` / `--font-geist-mono` in layout.tsx and mapped to Tailwind's `font-sans` / `font-mono` in globals.css `@theme`.
+
+### Color Palette
+Use Tailwind `neutral-*` scale exclusively. No brand colors.
+- **Background**: `white` (page), `neutral-50` (subtle fills like source chips, hover states)
+- **Borders**: `neutral-200` (default), `neutral-300` (hover)
+- **Text**: `neutral-950` (primary/headings), `neutral-800` (assistant body), `neutral-500` (secondary/descriptions), `neutral-400` (muted/labels/placeholders)
+- **Accent**: `neutral-950` (buttons, user bubbles, avatars, input focus border). No other accent color.
+
+### Component Patterns
+- **Buttons**: `bg-neutral-950 text-white hover:bg-neutral-800`. Icon-only where possible (e.g. arrow-up for send). Use `rounded-lg`.
+- **Inputs**: `border-neutral-200 focus:border-neutral-950`. No focus ring, just border color change. Use `rounded-lg`, `text-[14px]`.
+- **Cards/chips**: `border border-neutral-200 bg-neutral-50 rounded-md`. Inline flex for compact tags (e.g. source citations).
+- **Message layout**: User messages right-aligned as black pills (`bg-neutral-950 text-white rounded-2xl`). Assistant messages left-aligned with a small black book-icon avatar (`h-6 w-6 rounded-md bg-neutral-950`) and plain text (no background/border).
+- **Empty states**: Centered vertically, staggered `fade-in-up` animation. Suggestion cards in a 2-column grid, clickable.
+- **Labels/section headers**: Uppercase, `text-[11px] font-medium tracking-wider text-neutral-400`.
+
+### Animations
+Defined as custom keyframes in globals.css `@theme`:
+- `animate-fade-in` — simple opacity 0→1 (0.4s)
+- `animate-fade-in-up` — opacity + translateY 8px→0 (0.5s). Use `opacity-0` on the element and stagger with `style={{ animationDelay }}`.
+- `animate-pulse-dot` — scale/opacity pulse for loading dots (1.4s infinite)
+
+### Icons
+Inline SVGs, not an icon library. Stroke-based, `strokeWidth="2"` or `"2.5"`, `strokeLinecap="round"`, `strokeLinejoin="round"`. White stroke on dark backgrounds.

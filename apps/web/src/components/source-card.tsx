@@ -2,13 +2,11 @@ import type { Source } from "@constituicao/shared";
 
 export function SourceCard({ source }: { source: Source }) {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm">
-      <p className="font-medium text-green-800">
-        Artigo {source.articleNumber}.º — {source.title}
-      </p>
-      {source.hierarchy && (
-        <p className="mt-0.5 text-xs text-gray-500">{source.hierarchy}</p>
-      )}
+    <div className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 px-2.5 py-1 transition-colors hover:bg-neutral-100">
+      <span className="font-mono text-[11px] font-semibold text-neutral-950">
+        Art. {source.articleNumber}.º
+      </span>
+      <span className="text-[11px] text-neutral-500">{source.title}</span>
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Constituição Portuguesa - Chatbot",
+  title: "Constituição Portuguesa",
   description:
-    "Chatbot sobre a Constituição da República Portuguesa. Faça perguntas e receba respostas fundamentadas nos artigos constitucionais.",
+    "Assistente sobre a Constituição da República Portuguesa. Faça perguntas e receba respostas fundamentadas nos artigos constitucionais.",
 };
 
 export default function RootLayout({
@@ -13,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt">
-      <body className="bg-gray-50 text-gray-900 antialiased">{children}</body>
+    <html lang="pt" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="bg-white font-sans text-neutral-950 antialiased">
+        {children}
+      </body>
     </html>
   );
 }
