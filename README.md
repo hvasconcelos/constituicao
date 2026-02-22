@@ -128,6 +128,10 @@ Abrir [http://localhost:3000](http://localhost:3000).
 | `FRONTEND_URL` | Nao | `http://localhost:3000` | URL do frontend (CORS) |
 | `NEXT_PUBLIC_API_URL` | Nao | `http://localhost:8080` | URL da API para o frontend |
 | `RAG_TOP_K` | Nao | `5` | Numero de artigos recuperados por query |
+| `MAX_TOKENS` | Nao | `1024` | Maximo de tokens por resposta do LLM |
+| `CHAT_RATE_LIMIT` | Nao | `10` | Max pedidos chat por janela por IP |
+| `SEARCH_RATE_LIMIT` | Nao | `20` | Max pedidos search por janela por IP |
+| `RATE_LIMIT_WINDOW_MS` | Nao | `60000` | Janela de rate limiting em ms (1 minuto) |
 
 ## Como Funciona
 

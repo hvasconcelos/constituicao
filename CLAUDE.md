@@ -45,6 +45,16 @@ bun run ingest           # Parse constituicao.txt, embed, store in ChromaDB
 - **OpenAI API**: Used only for embeddings (`text-embedding-3-small`). Key: `OPENAI_API_KEY`.
 - **OpenRouter**: Used for chat LLM. Model configurable via `OPENROUTER_MODEL`. Key: `OPENROUTER_API_KEY`.
 
+## Abuse Prevention & Cost Controls
+
+Several layers protect against abuse and runaway costs:
+
+- **Rate limiting** (`hono-rate-limiter`): Per-IP limits on `/api/chat` and `/api/search`. Configurable via `CHAT_RATE_LIMIT`, `SEARCH_RATE_LIMIT`, and `RATE_LIMIT_WINDOW_MS` env vars.
+- **Input validation**: Message content capped at 1000 chars, conversation history at 20 messages, search queries at 500 chars (Zod schemas in `chat.ts` / `search.ts`).
+- **Max tokens**: LLM response capped via `MAX_TOKENS` env var (default 1024).
+- **Query cache**: In-memory LRU cache (200 entries, 5-min TTL) in `chroma.ts` skips embedding + vector search for repeated queries.
+- **OpenRouter budget**: Set a monthly spending limit at https://openrouter.ai/settings/limits as a hard safety net.
+
 ## Code Conventions
 
 - TypeScript everywhere, strict mode
