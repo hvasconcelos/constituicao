@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { rateLimiter } from "hono-rate-limiter";
 import { config } from "./lib/config";
 import chat from "./routes/chat";
 import search from "./routes/search";
@@ -16,6 +17,26 @@ app.use(
     allowHeaders: ["Content-Type"],
     allowMethods: ["GET", "POST", "OPTIONS"],
     exposeHeaders: ["X-Sources"],
+  })
+);
+
+// Rate limit chat endpoint: 10 requests per minute per IP
+app.use(
+  "/api/chat",
+  rateLimiter({
+    windowMs: 60 * 1000,
+    limit: 10,
+    keyGenerator: (c) => c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown",
+  })
+);
+
+// Rate limit search endpoint: 20 requests per minute per IP
+app.use(
+  "/api/search",
+  rateLimiter({
+    windowMs: 60 * 1000,
+    limit: 20,
+    keyGenerator: (c) => c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown",
   })
 );
 
