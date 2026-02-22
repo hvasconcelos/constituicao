@@ -1,24 +1,39 @@
 "use client";
 
-import { useMemo } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { memo, useMemo } from "react";
+import dynamic from "next/dynamic";
 import type { Source } from "@constituicao/shared";
 import { parseTextWithCitations } from "@/lib/parse-citations";
+
+const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
+const remarkGfm = import("remark-gfm").then((m) => m.default);
+let resolvedRemarkGfm: typeof import("remark-gfm").default | null = null;
+remarkGfm.then((plugin) => { resolvedRemarkGfm = plugin; });
+
+const REMARK_PLUGINS_EMPTY: [] = [];
 
 interface MarkdownRendererProps {
   content: string;
   sources?: Source[];
 }
 
-export function MarkdownRenderer({ content, sources }: MarkdownRendererProps) {
+export const MarkdownRenderer = memo(function MarkdownRenderer({
+  content,
+  sources,
+}: MarkdownRendererProps) {
+  const remarkPlugins = useMemo(
+    () => (resolvedRemarkGfm ? [resolvedRemarkGfm] : REMARK_PLUGINS_EMPTY),
+    []
+  );
+
   const components = useMemo(() => {
     if (!sources || sources.length === 0) return {};
 
-    // Override text rendering inside paragraphs, list items, headings, etc.
-    // to inject interactive article citations
+    const sourceMap = new Map(
+      sources.map((s) => [s.articleNumber, s])
+    );
     const withCitations = (text: string) =>
-      parseTextWithCitations(text, sources);
+      parseTextWithCitations(text, sourceMap);
 
     const wrap =
       (Tag: string) =>
@@ -43,11 +58,11 @@ export function MarkdownRenderer({ content, sources }: MarkdownRendererProps) {
   }, [sources]);
 
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+    <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
       {content}
     </ReactMarkdown>
   );
-}
+});
 
 /**
  * Recursively processes children, replacing plain text strings

@@ -10,12 +10,8 @@ const ARTICLE_REGEX = /Artigo\s+(\d+[A-Z]?)\.[ºª°](?:,?\s*n\.[ºª°s]\s*\d+(
  */
 export function parseTextWithCitations(
   text: string,
-  sources: Source[]
+  sourceMap: Map<string, Source>
 ): React.ReactNode[] {
-  const sourceMap = new Map<string, Source>();
-  for (const source of sources) {
-    sourceMap.set(source.articleNumber, source);
-  }
 
   const nodes: React.ReactNode[] = [];
   let lastIndex = 0;
