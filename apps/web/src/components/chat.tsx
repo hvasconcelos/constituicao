@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Source } from "@constituicao/shared";
 import { Button } from "@/components/ui/button";
@@ -17,11 +17,15 @@ const suggestions = [
   "Quais os poderes do Presidente da República?",
 ];
 
-export function Chat() {
+interface ChatProps {
+  onConversationChange?: (hasMessages: boolean, resetFn: () => void) => void;
+}
+
+export function Chat({ onConversationChange }: ChatProps) {
   const [sourcesMap, setSourcesMap] = useState<Record<string, Source[]>>({});
   const pendingSources = useRef<Source[] | null>(null);
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, append } =
+  const { messages, setMessages, input, handleInputChange, handleSubmit, isLoading, append } =
     useChat({
       api: "/api/chat",
       onResponse: async (response) => {
@@ -47,6 +51,16 @@ export function Chat() {
         }
       },
     });
+
+  const handleNewChat = () => {
+    setMessages([]);
+    setSourcesMap({});
+    pendingSources.current = null;
+  };
+
+  useEffect(() => {
+    onConversationChange?.(messages.length > 0, handleNewChat);
+  }, [messages.length > 0]);
 
   if (messages.length === 0) {
     return (
