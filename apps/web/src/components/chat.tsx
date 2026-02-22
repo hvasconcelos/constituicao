@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Source } from "@constituicao/shared";
 import { Button } from "@/components/ui/button";
@@ -54,15 +54,17 @@ export function Chat({ onConversationChange }: ChatProps) {
       },
     });
 
-  const handleNewChat = () => {
+  const handleNewChat = useCallback(() => {
     setMessages([]);
     setSourcesMap({});
     pendingSources.current = null;
-  };
+  }, [setMessages]);
+
+  const hasMessages = messages.length > 0;
 
   useEffect(() => {
-    onConversationChange?.(messages.length > 0, handleNewChat);
-  }, [messages.length > 0]);
+    onConversationChange?.(hasMessages, handleNewChat);
+  }, [hasMessages, onConversationChange, handleNewChat]);
 
   if (messages.length === 0) {
     return (
