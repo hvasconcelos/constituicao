@@ -43,6 +43,7 @@ chat.post("/", async (c) => {
     model: getModel(),
     system: systemPrompt,
     messages,
+    maxTokens: 1024,
   });
 
   // Return a data stream response with sources as custom data
