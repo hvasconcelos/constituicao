@@ -28,4 +28,5 @@ console.log(`API server running on port ${config.apiPort}`);
 export default {
   port: config.apiPort,
   fetch: app.fetch,
+  idleTimeout: 120,
 };
