@@ -1,4 +1,7 @@
+"use client";
+
 import type { Source } from "@constituicao/shared";
+import { MarkdownRenderer } from "./markdown-renderer";
 import { SourceCard } from "./source-card";
 import { BookIcon } from "./icons";
 
@@ -25,8 +28,8 @@ export function MessageBubble({ role, content, sources }: MessageBubbleProps) {
         <BookIcon size={12} strokeWidth={2.5} />
       </div>
       <div className="min-w-0 flex-1 space-y-3">
-        <div className="whitespace-pre-wrap text-[14px] leading-relaxed text-foreground/80">
-          {content}
+        <div className="prose-assistant text-[14px] leading-[1.8] text-foreground/80">
+          <MarkdownRenderer content={content} sources={sources} />
         </div>
         {sources && sources.length > 0 && (
           <div className="space-y-1.5">

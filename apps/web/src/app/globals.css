@@ -173,3 +173,90 @@ textarea {
     @apply bg-background text-foreground;
   }
 }
+
+/* Markdown prose styling for assistant messages */
+.prose-assistant > :first-child {
+  margin-top: 0;
+}
+
+.prose-assistant > :last-child {
+  margin-bottom: 0;
+}
+
+.prose-assistant p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-assistant h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-top: 1.25em;
+  margin-bottom: 0.375em;
+  color: var(--foreground);
+}
+
+.prose-assistant h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.25em;
+  color: var(--foreground);
+}
+
+.prose-assistant strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.prose-assistant em {
+  font-style: italic;
+}
+
+.prose-assistant ul,
+.prose-assistant ol {
+  margin-top: 0.375em;
+  margin-bottom: 0.375em;
+  padding-left: 1.25em;
+}
+
+.prose-assistant ul {
+  list-style-type: disc;
+}
+
+.prose-assistant ol {
+  list-style-type: decimal;
+}
+
+.prose-assistant li {
+  margin-top: 0.125em;
+  margin-bottom: 0.125em;
+}
+
+.prose-assistant li::marker {
+  color: var(--muted-foreground);
+}
+
+.prose-assistant blockquote {
+  border-left: 2px solid var(--border);
+  padding-left: 0.75em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+
+.prose-assistant code {
+  font-family: var(--font-geist-mono);
+  font-size: 0.85em;
+  background: var(--secondary);
+  padding: 0.125em 0.3em;
+  border-radius: 0.25rem;
+}
+
+.prose-assistant hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
