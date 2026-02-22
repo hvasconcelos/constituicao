@@ -19,4 +19,9 @@ export const config = {
   apiPort: parseInt(optionalEnv("API_PORT", "8080")),
   frontendUrl: optionalEnv("FRONTEND_URL", "http://localhost:3000"),
   ragTopK: parseInt(optionalEnv("RAG_TOP_K", "5")),
+  maxTokens: parseInt(optionalEnv("MAX_TOKENS", "1024")),
+  // Rate limiting
+  chatRateLimit: parseInt(optionalEnv("CHAT_RATE_LIMIT", "10")),
+  searchRateLimit: parseInt(optionalEnv("SEARCH_RATE_LIMIT", "20")),
+  rateLimitWindowMs: parseInt(optionalEnv("RATE_LIMIT_WINDOW_MS", "60000")),
 } as const;

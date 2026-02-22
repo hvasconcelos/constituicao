@@ -20,22 +20,22 @@ app.use(
   })
 );
 
-// Rate limit chat endpoint: 10 requests per minute per IP
+// Rate limit chat endpoint (default: 10 requests per minute per IP)
 app.use(
   "/api/chat",
   rateLimiter({
-    windowMs: 60 * 1000,
-    limit: 10,
+    windowMs: config.rateLimitWindowMs,
+    limit: config.chatRateLimit,
     keyGenerator: (c) => c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown",
   })
 );
 
-// Rate limit search endpoint: 20 requests per minute per IP
+// Rate limit search endpoint (default: 20 requests per minute per IP)
 app.use(
   "/api/search",
   rateLimiter({
-    windowMs: 60 * 1000,
-    limit: 20,
+    windowMs: config.rateLimitWindowMs,
+    limit: config.searchRateLimit,
     keyGenerator: (c) => c.req.header("x-forwarded-for") ?? c.req.header("x-real-ip") ?? "unknown",
   })
 );

@@ -4,6 +4,7 @@ import { z } from "zod";
 import { queryRelevantArticles } from "../lib/chroma";
 import { getModel } from "../lib/ai";
 import { buildSystemPrompt } from "../lib/prompt";
+import { config } from "../lib/config";
 
 const chat = new Hono();
 
@@ -43,7 +44,7 @@ chat.post("/", async (c) => {
     model: getModel(),
     system: systemPrompt,
     messages,
-    maxTokens: 1024,
+    maxTokens: config.maxTokens,
   });
 
   // Return a data stream response with sources as custom data
