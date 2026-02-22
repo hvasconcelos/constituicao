@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   title: "Constituição Portuguesa",
   description:
     "Assistente sobre a Constituição da República Portuguesa. Faça perguntas e receba respostas fundamentadas nos artigos constitucionais.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({

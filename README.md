@@ -1,5 +1,7 @@
 # Constituicao Portuguesa - Chatbot
 
+[![License: Non-Commercial](https://img.shields.io/badge/License-Non--Commercial-red.svg)](./LICENSE)
+
 Chatbot RAG (Retrieval Augmented Generation) sobre a Constituicao da Republica Portuguesa. Faca perguntas sobre a Constituicao e receba respostas fundamentadas nos artigos constitucionais, com citacoes das fontes.
 
 ## Arquitetura
@@ -135,3 +137,11 @@ Abrir [http://localhost:3000](http://localhost:3000).
 4. Os artigos sao injetados no system prompt como contexto
 5. O LLM (via OpenRouter) gera uma resposta em streaming, citando os artigos
 6. O frontend mostra a resposta com cards das fontes consultadas
+
+## Contribuir
+
+Contribuicoes sao bem-vindas! Consulta [CONTRIBUTING.md](./CONTRIBUTING.md) para mais detalhes.
+
+## Licenca
+
+Este projeto esta licenciado sob uma [licenca Non-Commercial](./LICENSE). O uso comercial e a disponibilizacao como SaaS nao sao permitidos.

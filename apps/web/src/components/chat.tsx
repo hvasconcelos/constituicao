@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { MessageList } from "./message-list";
 import { ChatInput } from "./chat-input";
-import { ArrowUpIcon, BookIcon } from "./icons";
+import { ArrowUpIcon } from "./icons";
+import { Logo } from "./logo";
+import { PortugueseFlag } from "./portuguese-flag";
 
 const suggestions = [
   "O que diz a Constituição sobre a liberdade de expressão?",
@@ -68,12 +70,13 @@ export function Chat({ onConversationChange }: ChatProps) {
         <div className="flex flex-1 flex-col items-center justify-center px-4">
           {/* Logo + title */}
           <div className="animate-fade-in-up mb-8 flex flex-col items-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-              <BookIcon size={22} />
+            <Logo size={48} className="mb-4" />
+            <div className="mb-1.5 flex items-center gap-2">
+              <h2 className="text-lg font-semibold tracking-tight text-foreground">
+                Constituição Portuguesa
+              </h2>
+              <PortugueseFlag size={22} />
             </div>
-            <h2 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
-              Constituição Portuguesa
-            </h2>
             <p className="max-w-sm text-center text-[13px] leading-relaxed text-muted-foreground">
               Faça uma pergunta sobre a Constituição da República Portuguesa.
             </p>
@@ -137,6 +140,7 @@ export function Chat({ onConversationChange }: ChatProps) {
           style={{ animationDelay: "300ms" }}
         >
           <div className="mx-auto flex max-w-2xl items-center justify-center gap-1.5 text-[12px] text-muted-foreground">
+            <PortugueseFlag size={14} />
             <a
               href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
               target="_blank"
@@ -145,8 +149,16 @@ export function Chat({ onConversationChange }: ChatProps) {
             >
               Constituição da República Portuguesa
             </a>
+            <a
+              href="https://github.com/hvasconcelos/constituicao"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
+            >
+              Projeto Open source
+            </a>
             <span>·</span>
-            <span>Projeto open source</span>
+            <span>&copy; 2026</span>
           </div>
         </footer>
       </div>

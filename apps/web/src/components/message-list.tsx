@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import type { Message } from "ai";
 import type { Source } from "@constituicao/shared";
 import { MessageBubble } from "./message-bubble";
-import { BookIcon } from "./icons";
+import { Logo } from "./logo";
 
 interface MessageListProps {
   messages: Message[];
@@ -39,9 +39,7 @@ export function MessageList({
         {isLoading &&
           messages[messages.length - 1]?.role !== "assistant" && (
             <div className="flex items-start gap-3">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <BookIcon size={12} strokeWidth={2.5} />
-              </div>
+              <Logo size={24} className="shrink-0" />
               <div className="flex items-center gap-1 pt-1">
                 <span
                   className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-muted-foreground"

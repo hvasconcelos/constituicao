@@ -3,7 +3,7 @@
 import type { Source } from "@constituicao/shared";
 import { MarkdownRenderer } from "./markdown-renderer";
 import { SourceCard } from "./source-card";
-import { BookIcon } from "./icons";
+import { Logo } from "./logo";
 
 interface MessageBubbleProps {
   role: "user" | "assistant";
@@ -24,9 +24,7 @@ export function MessageBubble({ role, content, sources }: MessageBubbleProps) {
 
   return (
     <div className="flex animate-fade-in items-start gap-3">
-      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-        <BookIcon size={12} strokeWidth={2.5} />
-      </div>
+      <Logo size={24} className="mt-0.5 shrink-0" />
       <div className="min-w-0 flex-1 space-y-3">
         <div className="prose-assistant text-[14px] leading-[1.8] text-foreground/80">
           <MarkdownRenderer content={content} sources={sources} />
