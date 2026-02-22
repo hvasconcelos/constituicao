@@ -91,8 +91,8 @@ export function Chat({ onConversationChange }: ChatProps) {
                 onChange={handleInputChange}
                 placeholder="Pergunte algo sobre a Constituição..."
                 disabled={isLoading}
-                rows={1}
-                className="min-h-0 flex-1 resize-none border-0 bg-transparent px-2 py-1.5 text-[14px] shadow-none outline-none focus-visible:ring-0"
+                rows={3}
+                className="flex-1 resize-none border-0 bg-transparent px-2 py-1.5 text-[14px] shadow-none outline-none [field-sizing:fixed] focus-visible:ring-0"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
