@@ -12,6 +12,7 @@ export function Logo({ size = 24, className }: LogoProps) {
       alt="Constituição da República Portuguesa"
       width={size}
       height={size}
+      sizes={`${size}px`}
       className={className}
     />
   );

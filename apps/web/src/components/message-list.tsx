@@ -27,14 +27,15 @@ export function MessageList({
     <div className="flex-1 overflow-y-auto px-4 py-6">
       <div className="mx-auto max-w-3xl space-y-5">
         {messages.map((message) => (
-          <MessageBubble
-            key={message.id}
-            role={message.role as "user" | "assistant"}
-            content={message.content}
-            sources={
-              message.role === "assistant" ? sourcesMap[message.id] : undefined
-            }
-          />
+          <div key={message.id} className="message-item">
+            <MessageBubble
+              role={message.role as "user" | "assistant"}
+              content={message.content}
+              sources={
+                message.role === "assistant" ? sourcesMap[message.id] : undefined
+              }
+            />
+          </div>
         ))}
         {isLoading &&
           messages[messages.length - 1]?.role !== "assistant" && (
