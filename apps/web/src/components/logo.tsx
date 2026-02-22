@@ -9,7 +9,7 @@ export function Logo({ size = 24, className }: LogoProps) {
   return (
     <Image
       src="/icon-192.png"
-      alt="Constituição Portuguesa"
+      alt="Constituição da República Portuguesa"
       width={size}
       height={size}
       className={className}

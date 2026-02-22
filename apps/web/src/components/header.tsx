@@ -15,7 +15,7 @@ export function Header({ onNewChat, showNewChat }: HeaderProps) {
         <div className="flex items-center gap-3">
           <Logo size={24} />
           <span className="text-sm font-medium tracking-tight text-foreground">
-            Constituição Portuguesa
+            Constituição da República Portuguesa
           </span>
           <PortugueseFlag size={18} />
         </div>

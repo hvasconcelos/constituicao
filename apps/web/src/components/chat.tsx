@@ -73,7 +73,7 @@ export function Chat({ onConversationChange }: ChatProps) {
             <Logo size={48} className="mb-4" />
             <div className="mb-1.5 flex items-center gap-2">
               <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                Constituição Portuguesa
+                Constituição da República Portuguesa
               </h2>
               <PortugueseFlag size={22} />
             </div>

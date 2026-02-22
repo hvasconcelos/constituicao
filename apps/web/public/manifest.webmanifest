@@ -1,6 +1,7 @@
 {
-  "name": "Constituição Portuguesa",
-  "short_name": "Constituição",
+  "name": "Constituição Portuguesa — Assistente IA",
+  "short_name": "Constituição IA",
+  "description": "Consulte a Constituição da República Portuguesa com inteligência artificial.",
   "icons": [
     {
       "src": "/icon-192.png",
