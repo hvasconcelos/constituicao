@@ -1,0 +1,15 @@
+{
+  "name": "constituicao",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:api": "bun run --filter @constituicao/api dev",
+    "dev:web": "bun run --filter @constituicao/web dev",
+    "dev": "bun run dev:api & bun run dev:web",
+    "ingest": "bun run --filter @constituicao/api ingest"
+  },
+  "dependencies": {
+    "@chroma-core/default-embed": "^0.1.9",
+    "chromadb": "^3.3.1"
+  }
+}

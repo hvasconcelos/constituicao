@@ -1,0 +1,23 @@
+{
+  "name": "@constituicao/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "ingest": "bun run scripts/ingest.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.0.0",
+    "@constituicao/shared": "workspace:*",
+    "ai": "^4.0.0",
+    "chromadb": "^1.9.0",
+    "hono": "^4.6.0",
+    "openai": "^4.70.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.0",
+    "typescript": "^5.7.0"
+  }
+}
