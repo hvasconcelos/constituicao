@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import type { Message } from "ai";
 import type { Source } from "@constituicao/shared";
 import { MessageBubble } from "./message-bubble";
+import { BookIcon } from "./icons";
 
 interface MessageListProps {
   messages: Message[];
@@ -38,31 +39,20 @@ export function MessageList({
         {isLoading &&
           messages[messages.length - 1]?.role !== "assistant" && (
             <div className="flex items-start gap-3">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-neutral-950">
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-                </svg>
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                <BookIcon size={12} strokeWidth={2.5} />
               </div>
               <div className="flex items-center gap-1 pt-1">
                 <span
-                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-neutral-400"
+                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-muted-foreground"
                   style={{ animationDelay: "0ms" }}
                 />
                 <span
-                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-neutral-400"
+                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-muted-foreground"
                   style={{ animationDelay: "200ms" }}
                 />
                 <span
-                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-neutral-400"
+                  className="inline-block h-1.5 w-1.5 animate-pulse-dot rounded-full bg-muted-foreground"
                   style={{ animationDelay: "400ms" }}
                 />
               </div>

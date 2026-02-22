@@ -4,8 +4,11 @@ import { useChat } from "@ai-sdk/react";
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import type { Source } from "@constituicao/shared";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { MessageList } from "./message-list";
 import { ChatInput } from "./chat-input";
+import { ArrowUpIcon, BookIcon } from "./icons";
 
 const suggestions = [
   "O que diz a Constituição sobre a liberdade de expressão?",
@@ -50,27 +53,14 @@ export function Chat() {
       <div className="flex min-h-0 flex-1 flex-col">
         <div className="flex flex-1 flex-col items-center justify-center px-4">
           {/* Logo + title */}
-          <div
-            className="animate-fade-in-up mb-8 flex flex-col items-center"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-neutral-950">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-              </svg>
+          <div className="animate-fade-in-up mb-8 flex flex-col items-center">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <BookIcon size={22} />
             </div>
-            <h2 className="mb-1.5 text-lg font-semibold tracking-tight text-neutral-950">
+            <h2 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
               Constituição Portuguesa
             </h2>
-            <p className="max-w-sm text-center text-[13px] leading-relaxed text-neutral-500">
+            <p className="max-w-sm text-center text-[13px] leading-relaxed text-muted-foreground">
               Faça uma pergunta sobre a Constituição da República Portuguesa.
             </p>
           </div>
@@ -81,14 +71,14 @@ export function Chat() {
             className="animate-fade-in-up w-full max-w-2xl opacity-0"
             style={{ animationDelay: "100ms" }}
           >
-            <div className="flex items-end gap-2 rounded-xl border border-neutral-200 bg-white p-2 shadow-sm transition-colors focus-within:border-neutral-400">
-              <textarea
+            <div className="flex items-end gap-2 rounded-xl border border-border bg-background p-2 shadow-sm transition-colors focus-within:border-ring">
+              <Textarea
                 value={input}
                 onChange={handleInputChange}
                 placeholder="Pergunte algo sobre a Constituição..."
                 disabled={isLoading}
                 rows={1}
-                className="max-h-32 flex-1 resize-none bg-transparent px-2 py-1.5 text-[14px] text-neutral-950 outline-none placeholder:text-neutral-400 disabled:opacity-50"
+                className="min-h-0 flex-1 resize-none border-0 bg-transparent px-2 py-1.5 text-[14px] shadow-none outline-none focus-visible:ring-0"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
@@ -98,25 +88,13 @@ export function Chat() {
                   }
                 }}
               />
-              <button
+              <Button
                 type="submit"
+                size="icon-sm"
                 disabled={isLoading || !input.trim()}
-                className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-neutral-950 text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-30"
               >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="12" y1="19" x2="12" y2="5" />
-                  <polyline points="5 12 12 5 19 12" />
-                </svg>
-              </button>
+                <ArrowUpIcon size={14} />
+              </Button>
             </div>
           </form>
 
@@ -126,25 +104,30 @@ export function Chat() {
             style={{ animationDelay: "200ms" }}
           >
             {suggestions.map((q) => (
-              <button
+              <Button
                 key={q}
+                variant="outline"
+                size="sm"
                 onClick={() => append({ role: "user", content: q })}
-                className="cursor-pointer rounded-full border border-neutral-200 bg-white px-3.5 py-1.5 text-[12px] text-neutral-500 transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-950"
+                className="h-auto rounded-full px-3.5 py-1.5 text-[12px] font-normal text-muted-foreground hover:text-foreground"
               >
                 {q}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
 
         {/* Footer */}
-        <footer className="animate-fade-in border-t border-neutral-100 px-4 py-4 opacity-0" style={{ animationDelay: "300ms" }}>
-          <div className="mx-auto flex max-w-2xl items-center justify-center gap-1.5 text-[12px] text-neutral-400">
+        <footer
+          className="animate-fade-in border-t border-border px-4 py-4 opacity-0"
+          style={{ animationDelay: "300ms" }}
+        >
+          <div className="mx-auto flex max-w-2xl items-center justify-center gap-1.5 text-[12px] text-muted-foreground">
             <a
               href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline decoration-neutral-300 underline-offset-2 transition-colors hover:text-neutral-600"
+              className="underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
             >
               Constituição da República Portuguesa
             </a>
