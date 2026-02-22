@@ -1,5 +1,10 @@
 import type { Source } from "@constituicao/shared";
-import { ArticleCitation } from "@/components/article-citation";
+import dynamic from "next/dynamic";
+
+const ArticleCitation = dynamic(
+  () => import("@/components/article-citation").then((m) => m.ArticleCitation),
+  { ssr: false }
+);
 
 // Matches "Artigo 103.º", "Artigo 103.°", and optionally "n.º 1" / "n.os 1 e 2"
 const ARTICLE_REGEX = /Artigo\s+(\d+[A-Z]?)\.[ºª°](?:,?\s*n\.[ºª°s]\s*\d+(?:\s*(?:e|a)\s*\d+)*)?/g;
