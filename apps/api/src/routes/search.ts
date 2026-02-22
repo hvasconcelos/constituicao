@@ -5,7 +5,7 @@ import { queryRelevantArticles } from "../lib/chroma";
 const search = new Hono();
 
 const searchSchema = z.object({
-  query: z.string().min(1),
+  query: z.string().min(1).max(500),
   topK: z.number().int().min(1).max(20).optional(),
 });
 

@@ -9,11 +9,11 @@ const chat = new Hono();
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
-  content: z.string(),
+  content: z.string().max(1000),
 });
 
 const chatSchema = z.object({
-  messages: z.array(messageSchema).min(1),
+  messages: z.array(messageSchema).min(1).max(20),
 });
 
 chat.post("/", async (c) => {
