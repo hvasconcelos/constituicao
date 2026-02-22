@@ -1,5 +1,3 @@
-"use client";
-
 import type { FormEvent, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
