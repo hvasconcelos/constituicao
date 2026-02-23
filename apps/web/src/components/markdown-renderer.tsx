@@ -1,14 +1,16 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import dynamic from "next/dynamic";
 import type { Source } from "@constituicao/shared";
+import dynamic from "next/dynamic";
+import { memo, useMemo } from "react";
 import { parseTextWithCitations } from "@/lib/parse-citations";
 
 const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
 const remarkGfm = import("remark-gfm").then((m) => m.default);
 let resolvedRemarkGfm: typeof import("remark-gfm").default | null = null;
-remarkGfm.then((plugin) => { resolvedRemarkGfm = plugin; });
+remarkGfm.then((plugin) => {
+  resolvedRemarkGfm = plugin;
+});
 
 const REMARK_PLUGINS_EMPTY: [] = [];
 
@@ -23,15 +25,13 @@ export const MarkdownRenderer = memo(function MarkdownRenderer({
 }: MarkdownRendererProps) {
   const remarkPlugins = useMemo(
     () => (resolvedRemarkGfm ? [resolvedRemarkGfm] : REMARK_PLUGINS_EMPTY),
-    []
+    [],
   );
 
   const components = useMemo(() => {
     if (!sources || sources.length === 0) return {};
 
-    const sourceMap = new Map(
-      sources.map((s) => [s.articleNumber, s])
-    );
+    const sourceMap = new Map(sources.map((s) => [s.articleNumber, s]));
     const withCitations = (text: string) =>
       parseTextWithCitations(text, sourceMap);
 
@@ -70,7 +70,7 @@ export const MarkdownRenderer = memo(function MarkdownRenderer({
  */
 function processChildren(
   children: React.ReactNode,
-  withCitations: (text: string) => React.ReactNode[]
+  withCitations: (text: string) => React.ReactNode[],
 ): React.ReactNode {
   if (children == null) return children;
 
@@ -81,10 +81,12 @@ function processChildren(
   if (Array.isArray(children)) {
     return children.map((child, i) =>
       typeof child === "string" ? (
-        <span key={i}>{withCitations(child)}</span>
+        <span key={`citation-${i}-${child.slice(0, 16)}`}>
+          {withCitations(child)}
+        </span>
       ) : (
         child
-      )
+      ),
     );
   }
 

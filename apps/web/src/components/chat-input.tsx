@@ -1,4 +1,4 @@
-import type { FormEvent, ChangeEvent } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpIcon } from "./icons";
@@ -38,11 +38,7 @@ export function ChatInput({
             }
           }}
         />
-        <Button
-          type="submit"
-          size="icon"
-          disabled={isLoading || !input.trim()}
-        >
+        <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
           <ArrowUpIcon size={16} />
         </Button>
       </form>

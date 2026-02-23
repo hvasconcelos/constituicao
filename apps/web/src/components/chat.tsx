@@ -1,15 +1,15 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useCallback, useEffect, useRef, useState } from "react";
-import type { FormEvent } from "react";
 import type { Source } from "@constituicao/shared";
+import type { FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { MessageList } from "./message-list";
 import { ChatInput } from "./chat-input";
 import { ArrowUpIcon } from "./icons";
 import { Logo } from "./logo";
+import { MessageList } from "./message-list";
 import { PortugueseFlag } from "./portuguese-flag";
 
 const suggestions = [
@@ -27,32 +27,39 @@ export function Chat({ onConversationChange }: ChatProps) {
   const [sourcesMap, setSourcesMap] = useState<Record<string, Source[]>>({});
   const pendingSources = useRef<Source[] | null>(null);
 
-  const { messages, setMessages, input, handleInputChange, handleSubmit, isLoading, append } =
-    useChat({
-      api: "/api/chat",
-      onResponse: async (response) => {
-        const sourcesHeader = response.headers.get("X-Sources");
-        if (sourcesHeader) {
-          try {
-            const sources: Source[] = JSON.parse(
-              decodeURIComponent(sourcesHeader)
-            );
-            pendingSources.current = sources;
-          } catch {
-            // Ignore parse errors
-          }
+  const {
+    messages,
+    setMessages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+    append,
+  } = useChat({
+    api: "/api/chat",
+    onResponse: async (response) => {
+      const sourcesHeader = response.headers.get("X-Sources");
+      if (sourcesHeader) {
+        try {
+          const sources: Source[] = JSON.parse(
+            decodeURIComponent(sourcesHeader),
+          );
+          pendingSources.current = sources;
+        } catch {
+          // Ignore parse errors
         }
-      },
-      onFinish: (message) => {
-        if (pendingSources.current) {
-          setSourcesMap((prev) => ({
-            ...prev,
-            [message.id]: pendingSources.current!,
-          }));
-          pendingSources.current = null;
-        }
-      },
-    });
+      }
+    },
+    onFinish: (message) => {
+      if (pendingSources.current) {
+        setSourcesMap((prev) => ({
+          ...prev,
+          [message.id]: pendingSources.current as Source[],
+        }));
+        pendingSources.current = null;
+      }
+    },
+  });
 
   const handleNewChat = useCallback(() => {
     setMessages([]);
@@ -141,26 +148,57 @@ export function Chat({ onConversationChange }: ChatProps) {
           className="animate-fade-in border-t border-border px-4 py-4 opacity-0"
           style={{ animationDelay: "300ms" }}
         >
-          <div className="mx-auto flex max-w-2xl items-center justify-center gap-1.5 text-[12px] text-muted-foreground">
-            <PortugueseFlag size={14} />
-            <a
-              href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-            >
-              Constituição da República Portuguesa
-            </a>
-            <a
-              href="https://github.com/hvasconcelos/constituicao"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
-            >
-              Projeto Open source
-            </a>
-            <span>·</span>
-            <span>&copy; 2026</span>
+          <div className="relative flex items-center text-[12px] text-muted-foreground">
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-medium uppercase tracking-wider text-neutral-400">
+                Sponsors
+              </span>
+              <a
+                href="https://layerx.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 transition-opacity hover:opacity-100"
+              >
+                <img
+                  src="/sponsors/layerx.svg"
+                  alt="LayerX"
+                  className="h-5 w-5"
+                />
+              </a>
+              <a
+                href="https://luzia.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="opacity-60 transition-opacity hover:opacity-100"
+              >
+                <img
+                  src="/sponsors/luzia-logo.jpg"
+                  alt="Luzia"
+                  className="h-5 w-5 rounded"
+                />
+              </a>
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center gap-1.5 pointer-events-none">
+              <PortugueseFlag size={14} />
+              <a
+                href="https://www.parlamento.pt/Legislacao/Paginas/ConstituicaoRepublicaPortuguesa.aspx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
+              >
+                Constituição da República Portuguesa
+              </a>
+              <a
+                href="https://github.com/hvasconcelos/constituicao"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pointer-events-auto underline decoration-border underline-offset-2 transition-colors hover:text-foreground"
+              >
+                Projeto Open Source
+              </a>
+              <span>·</span>
+              <span>&copy; 2026</span>
+            </div>
           </div>
         </footer>
       </div>

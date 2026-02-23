@@ -30,10 +30,33 @@ export function PortugueseFlag({ size = 20, className }: PortugueseFlagProps) {
       <rect x="10.2" y="8.2" width="1.2" height="1.2" rx="0.2" fill="#003399" />
       <rect x="12.4" y="8.2" width="1.2" height="1.2" rx="0.2" fill="#003399" />
       <rect x="11.3" y="9.5" width="1.2" height="1.2" rx="0.2" fill="#003399" />
-      <rect x="10.2" y="10.8" width="1.2" height="1.2" rx="0.2" fill="#003399" />
-      <rect x="12.4" y="10.8" width="1.2" height="1.2" rx="0.2" fill="#003399" />
+      <rect
+        x="10.2"
+        y="10.8"
+        width="1.2"
+        height="1.2"
+        rx="0.2"
+        fill="#003399"
+      />
+      <rect
+        x="12.4"
+        y="10.8"
+        width="1.2"
+        height="1.2"
+        rx="0.2"
+        fill="#003399"
+      />
       {/* Red border on shield */}
-      <rect x="9.5" y="7.5" width="5" height="5.5" rx="0.5" fill="none" stroke="#FF0000" strokeWidth="0.4" />
+      <rect
+        x="9.5"
+        y="7.5"
+        width="5"
+        height="5.5"
+        rx="0.5"
+        fill="none"
+        stroke="#FF0000"
+        strokeWidth="0.4"
+      />
     </svg>
   );
 }

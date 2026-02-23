@@ -1,4 +1,7 @@
-import type { ConstitutionArticle, ArticleMetadata } from "@constituicao/shared";
+import type {
+  ArticleMetadata,
+  ConstitutionArticle,
+} from "@constituicao/shared";
 
 interface HierarchyState {
   part?: string;
@@ -11,9 +14,12 @@ interface HierarchyState {
 
 function buildHierarchy(state: HierarchyState): string {
   const parts: string[] = [];
-  if (state.part && state.partTitle) parts.push(`${state.part} - ${state.partTitle}`);
-  if (state.chapter && state.chapterTitle) parts.push(`${state.chapter} - ${state.chapterTitle}`);
-  if (state.section && state.sectionTitle) parts.push(`${state.section} - ${state.sectionTitle}`);
+  if (state.part && state.partTitle)
+    parts.push(`${state.part} - ${state.partTitle}`);
+  if (state.chapter && state.chapterTitle)
+    parts.push(`${state.chapter} - ${state.chapterTitle}`);
+  if (state.section && state.sectionTitle)
+    parts.push(`${state.section} - ${state.sectionTitle}`);
   return parts.join(" > ");
 }
 
@@ -28,7 +34,8 @@ export function parseConstitution(text: string): ConstitutionArticle[] {
   let currentHierarchy: string = "";
 
   const partRegex = /^PARTE\s+(.+)$/i;
-  const partTitleRegex = /^(?!PARTE|TITULO|TÍTULO|CAPÍTULO|CAPITULO|SECCAO|SECÇÃO|Artigo)([A-ZÁÉÍÓÚÂÊÔÃÕÇ\s,]+)$/;
+  const _partTitleRegex =
+    /^(?!PARTE|TITULO|TÍTULO|CAPÍTULO|CAPITULO|SECCAO|SECÇÃO|Artigo)([A-ZÁÉÍÓÚÂÊÔÃÕÇ\s,]+)$/;
   const titleRegex = /^T[IÍ]TULO\s+(.+)$/i;
   const chapterRegex = /^CAP[IÍ]TULO\s+(.+)$/i;
   const sectionRegex = /^SEC[CÇ][AÃ]O\s+(.+)$/i;

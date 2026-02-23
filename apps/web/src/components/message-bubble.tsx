@@ -1,8 +1,8 @@
-import { memo } from "react";
 import type { Source } from "@constituicao/shared";
+import { memo } from "react";
+import { Logo } from "./logo";
 import { MarkdownRenderer } from "./markdown-renderer";
 import { SourceCard } from "./source-card";
-import { Logo } from "./logo";
 
 interface MessageBubbleProps {
   role: "user" | "assistant";
@@ -10,7 +10,11 @@ interface MessageBubbleProps {
   sources?: Source[];
 }
 
-export const MessageBubble = memo(function MessageBubble({ role, content, sources }: MessageBubbleProps) {
+export const MessageBubble = memo(function MessageBubble({
+  role,
+  content,
+  sources,
+}: MessageBubbleProps) {
   if (role === "user") {
     return (
       <div className="flex animate-fade-in justify-end">

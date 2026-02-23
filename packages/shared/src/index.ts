@@ -1,8 +1,8 @@
 export type {
   ArticleMetadata,
-  ConstitutionArticle,
-  Source,
-  SearchResult,
   ChatRequestBody,
+  ConstitutionArticle,
   SearchRequestBody,
+  SearchResult,
+  Source,
 } from "./types";

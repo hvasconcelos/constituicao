@@ -1,15 +1,25 @@
 {
   "name": "constituicao",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "dev:api": "bun run --filter @constituicao/api dev",
     "dev:web": "bun run --filter @constituicao/web dev",
     "dev": "bun run dev:api & bun run dev:web",
-    "ingest": "bun run --filter @constituicao/api ingest"
+    "ingest": "bun run --filter @constituicao/api ingest",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "bun --filter '*' typecheck"
   },
   "dependencies": {
     "@chroma-core/default-embed": "^0.1.9",
     "chromadb": "^3.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.4"
   }
 }

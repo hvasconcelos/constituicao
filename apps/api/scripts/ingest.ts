@@ -1,13 +1,16 @@
 import { ChromaClient } from "chromadb";
 import OpenAI from "openai";
-import { parseConstitution } from "./parse-constitution";
 import path from "path";
+import { parseConstitution } from "./parse-constitution";
 
 const COLLECTION_NAME = "constituicao";
 const BATCH_SIZE = 50;
 
 async function main() {
-  const dataPath = path.resolve(import.meta.dir, "../../../data/constituicao.txt");
+  const dataPath = path.resolve(
+    import.meta.dir,
+    "../../../data/constituicao.txt",
+  );
   const file = Bun.file(dataPath);
 
   if (!(await file.exists())) {
@@ -29,7 +32,9 @@ async function main() {
   // Initialize clients
   const chromaHost = process.env.CHROMA_HOST || "localhost";
   const chromaPort = process.env.CHROMA_PORT || "8000";
-  const chroma = new ChromaClient({ path: `http://${chromaHost}:${chromaPort}` });
+  const chroma = new ChromaClient({
+    path: `http://${chromaHost}:${chromaPort}`,
+  });
   const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
   // Delete existing collection if it exists
@@ -51,7 +56,9 @@ async function main() {
     const batch = articles.slice(i, i + BATCH_SIZE);
     const texts = batch.map((a) => a.text);
 
-    console.log(`Embedding batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(articles.length / BATCH_SIZE)}...`);
+    console.log(
+      `Embedding batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(articles.length / BATCH_SIZE)}...`,
+    );
 
     const embeddingResponse = await openai.embeddings.create({
       model: "text-embedding-3-small",

@@ -3,11 +3,12 @@ import dynamic from "next/dynamic";
 
 const ArticleCitation = dynamic(
   () => import("@/components/article-citation").then((m) => m.ArticleCitation),
-  { ssr: false }
+  { ssr: false },
 );
 
 // Matches "Artigo 103.º", "Artigo 103.°", and optionally "n.º 1" / "n.os 1 e 2"
-const ARTICLE_REGEX = /Artigo\s+(\d+[A-Z]?)\.[ºª°](?:,?\s*n\.[ºª°s]\s*\d+(?:\s*(?:e|a)\s*\d+)*)?/g;
+const ARTICLE_REGEX =
+  /Artigo\s+(\d+[A-Z]?)\.[ºª°](?:,?\s*n\.[ºª°s]\s*\d+(?:\s*(?:e|a)\s*\d+)*)?/g;
 
 /**
  * Takes a plain text string and replaces "Artigo N.º" patterns
@@ -15,9 +16,8 @@ const ARTICLE_REGEX = /Artigo\s+(\d+[A-Z]?)\.[ºª°](?:,?\s*n\.[ºª°s]\s*\d+(
  */
 export function parseTextWithCitations(
   text: string,
-  sourceMap: Map<string, Source>
+  sourceMap: Map<string, Source>,
 ): React.ReactNode[] {
-
   const nodes: React.ReactNode[] = [];
   let lastIndex = 0;
   let matchIndex = 0;
@@ -36,7 +36,7 @@ export function parseTextWithCitations(
         key={`${articleNumber}-${matchIndex}`}
         label={match[0]}
         source={sourceMap.get(articleNumber) ?? null}
-      />
+      />,
     );
 
     lastIndex = end;

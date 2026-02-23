@@ -7,6 +7,7 @@ interface IconProps {
 export function BookIcon({ size = 16, strokeWidth = 2, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -25,6 +26,7 @@ export function BookIcon({ size = 16, strokeWidth = 2, className }: IconProps) {
 export function PlusIcon({ size = 16, strokeWidth = 2, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -41,9 +43,14 @@ export function PlusIcon({ size = 16, strokeWidth = 2, className }: IconProps) {
   );
 }
 
-export function ArrowUpIcon({ size = 16, strokeWidth = 2, className }: IconProps) {
+export function ArrowUpIcon({
+  size = 16,
+  strokeWidth = 2,
+  className,
+}: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
